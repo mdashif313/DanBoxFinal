@@ -56,9 +56,6 @@ public class Receiver extends Thread{
                 size -= bytesRead;
             }
 
-            //output.close();
-            //clientData.close();
-
             System.out.println("File "+fileName+" received from client.");
         } catch (IOException ex) {
             System.err.println("Client error. Connection closed.");
@@ -66,6 +63,9 @@ public class Receiver extends Thread{
     }
 
     
+    /*
+     * this method is used for updating log file
+     */
     public static void LogEntry(String sourcePath, String fileName){
         try {    
             String path = sourcePath+"log/log.txt";
