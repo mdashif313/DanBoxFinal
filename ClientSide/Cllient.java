@@ -28,6 +28,7 @@ public class Client {
         Scanner in= new Scanner(System.in);
         System.out.println("Please give your username: ");
         String inFromUser=in.nextLine();
+        System.out.println("(be careful about pattern, example : d:/temp/client/)");
         System.out.println("Please give your directory: ");
         String source=in.nextLine();
         Socket sock=new Socket("localhost",3500);
