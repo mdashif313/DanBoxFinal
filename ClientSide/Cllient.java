@@ -34,22 +34,16 @@ public class Client {
         
         initialize_client(sock,inFromUser);
         LogCreator(source);
-        /*System.out.println("Client Window");
-        ArrayList<String>fileList = new ArrayList<String>(100);
-        fileList.add("p.txt");
-        fileList.add("s.txt");
-        fileList.add("t.txt");*/
         
         new Thread(new Receiver(sock, inFromUser,source)).start();
         new Thread(new Sender(sock, inFromUser, source)).start();
-        
-        //new Thread(new Sender(sock, inFromUser, source, fileList)).start();
-        //new Thread(new Receiver(sock, inFromUser,source)).start();
+
     }   
 
     
     /*
-     * Client's log file initializer  
+     * Client's log file initializer
+     * it is used for synchronization
      */       
     public static void LogCreator(String sourcePath){
         try {
