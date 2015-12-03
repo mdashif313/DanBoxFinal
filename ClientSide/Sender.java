@@ -29,8 +29,20 @@ public class Sender extends Thread{
     }
     
     
-    public void run() {               
+    public void run() {  
+        try {
+            Thread.sleep(1000);
+        } catch (Exception e) {
+        }
+        
         String sourcePath=sourceDirectory.substring(0,sourceDirectory.length()-1);
+        ArrayList<String> sendList= WarmUp(sourcePath);
+        
+        for(int i=0; i<sendList.size(); i++){                   
+            sendFile(sendList.get(i));
+        } 
+        
+        
         while (true) { 
             try {
                 Thread.sleep(5000);            
@@ -39,7 +51,6 @@ public class Sender extends Thread{
 
                 for(int i=0; i<list.size(); i++){                   
                     sendFile(list.get(i));
-                    System.out.println(i);
                 }                
                 
             } catch (Exception e) {
@@ -48,6 +59,10 @@ public class Sender extends Thread{
         }
         
     }
+    
+    
+    
+    
     void sendFile(String fileName) {
         System.out.println(fileName);
         try {
@@ -78,5 +93,34 @@ public class Sender extends Thread{
         } catch (Exception e) {
             System.err.println("File does not exist!");
         } 
+    }
+    
+    /*
+     * A method to send all files
+     * exists in client directory
+     * after immediately start up
+     */
+    public static ArrayList<String> WarmUp(String path){
+        File folder= new File(path);
+        String clientDirectory= path+"/"; 
+        ArrayList<String> logList=ClientSynchronizer.LogReader(clientDirectory);
+        ArrayList<String> sendList=new ArrayList<String>();
+        File[] listOfFiles = folder.listFiles();
+        
+        for (int i = 0; i < listOfFiles.length; i++) {
+            boolean key=true;
+            String currentFile=listOfFiles[i].getName();
+            
+            for(int j=0; j<logList.size(); j++){
+                if(logList.get(j).equalsIgnoreCase(currentFile)){
+                    key=false;
+                }
+            }
+            if(key && listOfFiles[i].isFile()){
+                sendList.add(currentFile);
+            }
+        }
+        
+        return sendList;
     }
 }
