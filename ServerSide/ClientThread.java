@@ -112,7 +112,10 @@ public class ClientThread extends Thread{
 
     
     
-    
+    /*
+     * A method to send all files in server directory
+     * when client has just connected to server.
+     */
     public static void StartUp(String User_Name, String ServerDirectory){
         try {
             ClientThread ct;
