@@ -2,7 +2,7 @@
 The Final Version of our networking project.
 
 ## Motivation
-Basically we've tried to design a shared file hosting service.
+Basically we've tried to design a shared file hosting service using JAVA networking and I/O API.
 
 ## Features
 - You can manage a shared drive for your team.
